@@ -49,6 +49,6 @@ class Program
     // Function to display a result message, including the user's name and squared number.
     static void DisplayResult(string userName, int squaredNumber)
     {
-        Console.WriteLine($"Hello, {userName}! Your favorite number squared is: {squaredNumber}");
+        Console.WriteLine($"{userName}, the square of your number is {squaredNumber}");
     }
 }
