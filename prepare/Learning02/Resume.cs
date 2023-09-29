@@ -1,35 +1,25 @@
 using System;
-// Importing the System.Collections.Generic namespace for using List<T>
-using System.Collections.Generic;
+using System.Collections.Generic; // Importing the System.Collections.Generic namespace
 
-
+// Define the Resume class
 public class Resume
 {
-    private string _name;          // Private variable to store the person's name
-    private List<Job> _jobs = new List<Job>();  // Private list to store job history
+    public string _name;  // Stores the person's name
 
-    // Constructor to initialize the person's name
-    public Resume(string name)
-    {
-        _name = name;
-    }
+    // Create a list to store Job instances
+    public List<Job> _jobs = new List<Job>();
 
-    // Method to add a job to the resume
-    public void AddJob(Job job)
-    {
-        _jobs.Add(job);
-    }
-
-    // Method to display the resume including name and job details
+    // Method to display resume details
     public void Display()
     {
+        // Display the person's name
         Console.WriteLine($"Name: {_name}");
         Console.WriteLine("Jobs:");
 
-        // Loop through each job and display its details
+        // Iterate through each Job instance and display job details
         foreach (Job job in _jobs)
         {
-            job.Display();
+            job.Display(); // Calls the Display method of the Job class
         }
     }
 }
