@@ -2,15 +2,15 @@ using System;
 
 public class Job
 {
-    private string _company;
     private string _jobTitle;
+    private string _company;
     private int _startYear;
     private int _endYear;
 
-    public Job(string company, string jobTitle, int startYear, int endYear)
+    public Job(string jobTitle, string company, int startYear, int endYear)
     {
-        _company = company;
         _jobTitle = jobTitle;
+        _company = company;
         _startYear = startYear;
         _endYear = endYear;
     }

@@ -1,14 +1,19 @@
 using System;
-
+using System.Collections.Generic;
 
 public class Resume
 {
-    public string _name;
-    public List<Job> _jobs = new List<Job>();
+    private string _name;
+    private List<Job> _jobs = new List<Job>();
 
     public Resume(string name)
     {
         _name = name;
+    }
+
+    public void AddJob(Job job)
+    {
+        _jobs.Add(job);
     }
 
     public void Display()
