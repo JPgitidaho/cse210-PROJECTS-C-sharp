@@ -39,7 +39,13 @@ namespace DiaryApp
             {
                 foreach (var entry in entries)
                 {
-                    writer.WriteLine($"{entry.Date},{entry.Question},{entry.Response}");
+                    // Use double-quoting to encapsulate content and escape existing double-quotes
+                    //these modifications, the code handles quotation marks and commas within the 
+                    //content of diary entries correctly, making the CSV format suitable for Excel.
+                    string formattedQuestion = entry.Question.Replace("\"", "\"\"");
+                    string formattedResponse = entry.Response.Replace("\"", "\"\"");
+                    writer.WriteLine($"\"{entry.Date}\",\"{formattedQuestion}\",\"{formattedResponse}\"");
+                
                 }
             }
 
