@@ -14,6 +14,7 @@ namespace DiaryApp
             PromptGenerator promptGenerator = new PromptGenerator();
             bool exit = false;
 
+            // This do-while loop allows the user to perform various operations in the program until they choose to exit.
             do
             {
                 Console.WriteLine("Menu Options:");
@@ -70,13 +71,13 @@ namespace DiaryApp
                         }
                         break;
                     case "6":
-                        exit = true;//Used to control loop output logic
+                        exit = true;
                         break;
                     default:
                         Console.WriteLine("Invalid option. Please select a valid option.");
                         break;
                 }
-            } while (!exit);//Continue to execute the do-while loop as long as 'exit' is false.
+            } while (!exit);
 
             Console.WriteLine("Goodbye!");
         }
