@@ -76,7 +76,7 @@ namespace DiaryApp
                         Console.WriteLine("Invalid option. Please select a valid option.");
                         break;
                 }
-            } while (!exit);
+            } while (!exit);//Continue to execute the do-while loop as long as 'exit' is false.
 
             Console.WriteLine("Goodbye!");
         }
