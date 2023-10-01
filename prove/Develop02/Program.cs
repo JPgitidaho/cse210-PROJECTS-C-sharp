@@ -35,25 +35,25 @@ namespace DiaryApp
                         Console.WriteLine($"Prompt: {prompt}");
                         Console.Write("Your response: ");
                         string response = Console.ReadLine();
-                        diary.AddEntry(prompt, response);
+                        diary.AddEntry(prompt, response); // Calls the AddEntry method to add a new diary entry.
                         break;
                     case "2":
-                        diary.ShowDiary();
+                        diary.ShowDiary();// Calls the ShowDiary method to display all diary entries.
                         break;
                     case "3":
                         Console.Write("Enter the file name to save the diary: ");
                         string saveFileName = Console.ReadLine();
-                        diary.SaveDiaryToFile(saveFileName);
+                        diary.SaveDiaryToFile(saveFileName);// Calls the SaveDiaryToFile method to save diary entries to a file.
                         break;
                     case "4":
                         Console.Write("Enter the file name to load the diary from: ");
                         string loadFileName = Console.ReadLine();
-                        diary.LoadDiaryFromFile(loadFileName);
+                        diary.LoadDiaryFromFile(loadFileName);// Calls the LoadDiaryFromFile method to load diary entries from a file.
                         break;
                     case "5":
                         Console.Write("Enter a keyword to search for in diary entries: ");
                         string keyword = Console.ReadLine();
-                        var searchResults = diary.SearchEntries(keyword);
+                        var searchResults = diary.SearchEntries(keyword);// Calls the SearchEntries method to search for diary entries.
                         if (searchResults.Count > 0)
                         {
                             Console.WriteLine($"Search results for '{keyword}':");
@@ -71,13 +71,13 @@ namespace DiaryApp
                         }
                         break;
                     case "6":
-                        exit = true;
+                        exit = true;// Sets the 'exit' variable to true to exit the loop and end the program.
                         break;
                     default:
                         Console.WriteLine("Invalid option. Please select a valid option.");
                         break;
                 }
-            } while (!exit);
+            } while (!exit);// Continues the loop as long as 'exit' is false.
 
             Console.WriteLine("Goodbye!");
         }
