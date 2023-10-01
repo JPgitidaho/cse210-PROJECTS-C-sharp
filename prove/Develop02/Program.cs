@@ -1,9 +1,91 @@
 using System;
 
-class Program
+namespace DiaryApp
 {
-    static void Main(string[] args)
+    class Program
     {
-        Console.WriteLine("Hello Develop02 World!");
+        private static Diary diary;
+        private static System.Timers.Timer autoSaveTimer;
+
+        static void Main(string[] args)
+        {
+            diary = new Diary();
+
+            PromptGenerator promptGenerator = new PromptGenerator();
+            bool exit = false;
+
+            do
+            {
+                Console.WriteLine("Menu Options:");
+                Console.WriteLine("1. Write a new entry");
+                Console.WriteLine("2. Show diary");
+                Console.WriteLine("3. Save diary to a file");
+                Console.WriteLine("4. Load diary from a file");
+                Console.WriteLine("5. Search diary entries by keyword");
+                Console.WriteLine("6. Exit");
+
+                Console.Write("Select an option: ");
+                string choice = Console.ReadLine();
+
+                switch (choice)
+                {
+                    case "1":
+                        string prompt = promptGenerator.GeneratePrompt();
+                        Console.WriteLine($"Prompt: {prompt}");
+                        Console.Write("Your response: ");
+                        string response = Console.ReadLine();
+                        diary.AddEntry(prompt, response);
+                        break;
+                    case "2":
+                        diary.ShowDiary();
+                        break;
+                    case "3":
+                        Console.Write("Enter the file name to save the diary: ");
+                        string saveFileName = Console.ReadLine();
+                        diary.SaveDiaryToFile(saveFileName);
+                        break;
+                    case "4":
+                        Console.Write("Enter the file name to load the diary from: ");
+                        string loadFileName = Console.ReadLine();
+                        diary.LoadDiaryFromFile(loadFileName);
+                        break;
+                    case "5":
+                        Console.Write("Enter a keyword to search for in diary entries: ");
+                        string keyword = Console.ReadLine();
+                        var searchResults = diary.SearchEntries(keyword);
+                        if (searchResults.Count > 0)
+                        {
+                            Console.WriteLine($"Search results for '{keyword}':");
+                            foreach (var result in searchResults)
+                            {
+                                Console.WriteLine($"Date: {result.Date}");
+                                Console.WriteLine($"Question: {result.Question}");
+                                Console.WriteLine($"Response: {result.Response}");
+                                Console.WriteLine();
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine($"No entries found containing '{keyword}'.");
+                        }
+                        break;
+                    case "6":
+                        exit = true;
+                        break;
+                    default:
+                        Console.WriteLine("Invalid option. Please select a valid option.");
+                        break;
+                }
+            } while (!exit);
+
+            Console.WriteLine("Goodbye!");
+        }
+
+        private static void AutoSaveTimerElapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            string autoSaveFileName = "autosave.csv";
+            diary.SaveDiaryToFile(autoSaveFileName);
+            Console.WriteLine($"Autosaved diary to: {autoSaveFileName}");
+        }
     }
 }
