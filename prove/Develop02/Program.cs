@@ -70,7 +70,7 @@ namespace DiaryApp
                         }
                         break;
                     case "6":
-                        exit = true;
+                        exit = true;//Used to control loop output logic
                         break;
                     default:
                         Console.WriteLine("Invalid option. Please select a valid option.");
