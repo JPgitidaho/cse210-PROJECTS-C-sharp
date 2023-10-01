@@ -5,10 +5,12 @@ using System.Linq;
 
 namespace DiaryApp
 {
+    // This class represents the diary and contains methods for diary operations.
     public class Diary
     {
         private List<Entry> entries = new List<Entry>();
 
+        // Add a new diary entry with a question and response.
         public void AddEntry(string question, string response)
         {
             DateTime currentDate = DateTime.Now;
@@ -17,6 +19,7 @@ namespace DiaryApp
             Console.WriteLine("Entry added to the diary.");
         }
 
+        // Display all entries in the diary.
         public void ShowDiary()
         {
             Console.WriteLine("Diary Entries:");
@@ -29,6 +32,7 @@ namespace DiaryApp
             }
         }
 
+        // Save the diary entries to a specified file.
         public void SaveDiaryToFile(string fileName)
         {
             using (StreamWriter writer = new StreamWriter(fileName))
@@ -42,6 +46,7 @@ namespace DiaryApp
             Console.WriteLine($"Diary saved to the file: {fileName}");
         }
 
+        // Load diary entries from a specified file.
         public void LoadDiaryFromFile(string fileName)
         {
             entries.Clear();
@@ -72,12 +77,14 @@ namespace DiaryApp
             }
         }
 
+        // Search for diary entries containing a keyword in the response.
         public List<Entry> SearchEntries(string keyword)
         {
             return entries.Where(entry => entry.Response.Contains(keyword)).ToList();
         }
     }
 
+    // This class generates prompts for diary entries.
     public class PromptGenerator
     {
         private List<string> prompts = new List<string>
@@ -89,6 +96,7 @@ namespace DiaryApp
             "If you could do one thing today, what would it be?"
         };
 
+        // Generate a random prompt.
         public string GeneratePrompt()
         {
             Random random = new Random();
