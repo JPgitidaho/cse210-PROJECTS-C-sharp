@@ -25,10 +25,7 @@ namespace DiaryApp
             Console.WriteLine("Diary Entries:");
             foreach (var entry in entries)
             {
-                Console.WriteLine($"Date: {entry.Date}");
-                Console.WriteLine($"Question: {entry.Question}");
-                Console.WriteLine($"Response: {entry.Response}");
-                Console.WriteLine();
+                Console.WriteLine(entry.GetFormattedEntry());
             }
         }
 
