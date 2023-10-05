@@ -1,4 +1,3 @@
-// Entry.cs
 using System;
 
 namespace DiaryApp
