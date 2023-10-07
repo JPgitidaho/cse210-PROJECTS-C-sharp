@@ -92,11 +92,12 @@ namespace DiaryApp
     {
         private List<string> prompts = new List<string>
         {
-            "Who was the most interesting person you interacted with today?",
-            "What was the best part of your day?",
-            "How did you see the hand of the Lord in your life today?",
-            "What was the strongest emotion you felt today?",
-            "If you could do one thing today, what would it be?"
+            "What new knowledge or skill did you acquire today?",
+            "Did you have the opportunity to perform a random act of kindness today?",
+            "What was your standout achievement of the day?",
+            "Did anything make you feel grateful today?",
+            "Was there a moment when you stepped out of your comfort zone today?",
+            "What music, book, or movie positively influenced you today?"
         };
 
         // Generate a random prompt.
