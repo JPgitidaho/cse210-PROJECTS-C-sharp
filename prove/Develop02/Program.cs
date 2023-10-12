@@ -70,4 +70,25 @@ namespace DiaryApp
                             Console.WriteLine($"No entries found containing '{keyword}'.");
                         }
                         break;
-                    
+                        
+                        case "6":
+                        exit = true;// Sets the 'exit' variable to true to exit the loop and end the program.
+                        break;
+                    default:
+                        Console.WriteLine("Invalid option. Please select a valid option.");
+                        break;
+                }
+            } while (!exit);// Continues the loop as long as 'exit' is false.
+
+            Console.WriteLine("Goodbye!");
+        }
+
+        // This method handles the timer event for auto-saving the diary.
+        private static void AutoSaveTimerElapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            string autoSaveFileName = "autosave.csv";
+            diary.SaveDiaryToFile(autoSaveFileName);
+            Console.WriteLine($"Autosaved diary to: {autoSaveFileName}");
+        }
+    }
+}                    
