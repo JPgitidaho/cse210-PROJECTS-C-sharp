@@ -99,6 +99,7 @@ namespace DiaryApp
             "Was there a moment when you stepped out of your comfort zone today?",
             "What music, book, or movie positively influenced you today?"
         };
+        
 
         // Generate a random prompt.
         public string GeneratePrompt()
