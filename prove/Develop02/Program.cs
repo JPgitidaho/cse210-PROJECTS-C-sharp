@@ -30,4 +30,44 @@ namespace DiaryApp
 
                 switch (choice)
                 {
-
+                    case "1":
+                        string prompt = promptGenerator.GeneratePrompt();
+                        Console.WriteLine($"Prompt: {prompt}");
+                        Console.Write("Your response: ");
+                        string response = Console.ReadLine();
+                        diary.AddEntry(prompt, response); // Calls the AddEntry method to add a new diary entry.
+                        break;
+                    case "2":
+                        diary.ShowDiary();// Calls the ShowDiary method to display all diary entries.
+                        break;
+                    case "3":
+                        Console.Write("Enter the file name to save the diary: ");
+                        string saveFileName = Console.ReadLine();
+                        diary.SaveDiaryToFile(saveFileName);// Calls the SaveDiaryToFile method to save diary entries to a file.
+                        break;
+                    case "4":
+                        Console.Write("Enter the file name to load the diary from: ");
+                        string loadFileName = Console.ReadLine();
+                        diary.LoadDiaryFromFile(loadFileName);// Calls the LoadDiaryFromFile method to load diary entries from a file.
+                        break;
+                    case "5":
+                        Console.Write("Enter a keyword to search for in diary entries: ");
+                        string keyword = Console.ReadLine();
+                        var searchResults = diary.SearchEntries(keyword);// Calls the SearchEntries method to search for diary entries.
+                        if (searchResults.Count > 0)
+                        {
+                            Console.WriteLine($"Search results for '{keyword}':");
+                            foreach (var result in searchResults)
+                            {
+                                Console.WriteLine($"Date: {result.Date}");
+                                Console.WriteLine($"Question: {result.Question}");
+                                Console.WriteLine($"Response: {result.Response}");
+                                Console.WriteLine();
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine($"No entries found containing '{keyword}'.");
+                        }
+                        break;
+                    
