@@ -29,7 +29,7 @@ class Program
                     MemorizeVerse(bibleBooks);
                     break;
                 case "4":
-                    Console.WriteLine("Goodbye.");
+                    Console.WriteLine("Goodbye, good try!.");
                     break;
                 default:
                     Console.WriteLine("Invalid option. Please try again.");
@@ -38,6 +38,36 @@ class Program
         } while (userInput != "4");
     }
 
-    // Implementation of SelectBook, SelectRandomVerse, and MemorizeVerse
-    // ...
+    // Implementation of selecting a book
+string SelectBook()
+{
+    Console.WriteLine("Choose a book from the Bible (e.g., 'John'):");
+    string selectedBook = Console.ReadLine();
+    // You can add logic here to validate the selected book
+    return selectedBook;
+}
+
+// Implementation of selecting a random verse
+string SelectRandomVerse(List<string> verses)
+{
+    Random random = new Random();
+    int randomIndex = random.Next(verses.Count);
+    return verses[randomIndex];
+}
+
+// Implementation of memorizing a verse
+void MemorizeVerse(string verse)
+{
+    Console.WriteLine("Selected Verse: ");
+    Console.WriteLine(verse);
+
+    // You can add logic here to allow the user to memorize the verse
+    Console.WriteLine("Type 'memorized' when you have memorized the verse.");
+    string userInput = Console.ReadLine();
+    if (userInput.ToLower() == "memorized")
+    {
+        Console.WriteLine("Verse memorized!");
+    }
+}
+
 }
