@@ -49,6 +49,9 @@ namespace DiaryApp
             Console.WriteLine($"Diary saved to the file: {fileName}");
         }
 
+
+
+
         // Load diary entries from a specified file.
         public void LoadDiaryFromFile(string fileName)
         {
