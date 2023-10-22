@@ -59,48 +59,61 @@ class Program
 }*/
 
 
+
 using System;
 using System.IO;
+using Newtonsoft.Json;
+
+
+class Bible
+{
+    public Metadata metadata { get; set; }
+    public Verse[] verses { get; set; }
+}
+
+class Metadata
+{
+    public string name { get; set; }
+}
+
+class Verse
+{
+    public string book_name { get; set; }
+    public VerseDetail[] verses { get; set; }
+}
+
+class VerseDetail
+{
+    public int chapter { get; set; }
+    public int verse { get; set; }
+    public string text { get; set; }
+}
 
 class Program
 {
     static void Main(string[] args)
     {
-        string filePath = "D:/BYU 3 SEMESTER/cse210-project/prove/Develop03/bible.csv";
+        string jsonPath = @"D:\BYU 3 SEMESTRE\cse210-project\prove\Develop03\bible.json"; // Ruta al archivo JSON
 
-        if (File.Exists(filePath))
+        if (File.Exists(jsonPath))
         {
-            try
-            {
-                using (StreamReader reader = new StreamReader(filePath))
-                {
-                    while (!reader.EndOfStream)
-                    {
-                        string line = reader.ReadLine();
-                        string[] fields = line.Split(',');
-                        if (fields.Length >= 6)
-                        {
-                            int field1 = int.Parse(fields[0]);
-                            string book = fields[1];
-                            int chapter = int.Parse(fields[2]);
-                            int verse = int.Parse(fields[3]);
-                            int field5 = int.Parse(fields[4]);
-                            string text = fields[5];
+            string json = File.ReadAllText(jsonPath);
+            var bible = JsonConvert.DeserializeObject<Bible>(json);
 
-                            Console.WriteLine($"{field1}, {book}, {chapter}, {verse}, {field5}, {text}");
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
+            Console.WriteLine($"Nombre de la Biblia: {bible.metadata.name}");
+
+            foreach (var book in bible.verses)
             {
-                Console.WriteLine("Error: " + ex.Message);
+                Console.WriteLine($"Libro: {book.book_name}");
+                foreach (var verse in book.verses)
+                {
+                    Console.WriteLine($"   Capítulo {verse.chapter}, Versículo {verse.verse}: {verse.text}");
+                }
             }
         }
         else
         {
-            Console.WriteLine("The file does not exist at the specified path.");
+            Console.WriteLine("El archivo JSON no se encuentra en la ruta especificada.");
         }
     }
 }
-
