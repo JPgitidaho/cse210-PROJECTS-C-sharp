@@ -1,4 +1,4 @@
-/*using System;
+using System;
 using System.Collections.Generic;
 
 class Program
@@ -55,65 +55,5 @@ class Program
             Console.Clear();
             Console.WriteLine(scripture.RenderText());
         } while (true);
-    }
-}*/
-
-
-
-using System;
-using System.IO;
-using Newtonsoft.Json;
-
-
-class Bible
-{
-    public Metadata metadata { get; set; }
-    public Verse[] verses { get; set; }
-}
-
-class Metadata
-{
-    public string name { get; set; }
-}
-
-class Verse
-{
-    public string book_name { get; set; }
-    public VerseDetail[] verses { get; set; }
-}
-
-class VerseDetail
-{
-    public int chapter { get; set; }
-    public int verse { get; set; }
-    public string text { get; set; }
-}
-
-class Program
-{
-    static void Main(string[] args)
-    {
-        string jsonPath = @"D:\BYU 3 SEMESTRE\cse210-project\prove\Develop03\bible.json"; // Ruta al archivo JSON
-
-        if (File.Exists(jsonPath))
-        {
-            string json = File.ReadAllText(jsonPath);
-            var bible = JsonConvert.DeserializeObject<Bible>(json);
-
-            Console.WriteLine($"Nombre de la Biblia: {bible.metadata.name}");
-
-            foreach (var book in bible.verses)
-            {
-                Console.WriteLine($"Libro: {book.book_name}");
-                foreach (var verse in book.verses)
-                {
-                    Console.WriteLine($"   Capítulo {verse.chapter}, Versículo {verse.verse}: {verse.text}");
-                }
-            }
-        }
-        else
-        {
-            Console.WriteLine("El archivo JSON no se encuentra en la ruta especificada.");
-        }
     }
 }
