@@ -33,6 +33,7 @@ class Program
         }
     }
 
+    // PlayScriptureGame function allows the user to interactively play the scripture hiding game.
     public static bool PlayScriptureGame(Scripture selectedScripture, Random random)
     {
         bool continuePlaying = true;
@@ -40,8 +41,8 @@ class Program
         while (continuePlaying)
         {
             selectedScripture.Reset();
-            
-            Console.Clear(); // Borra la pantalla de la consola.
+
+            Console.Clear(); // Clear the console screen.
             Console.WriteLine("Scripture Hiding Game");
             Console.WriteLine(selectedScripture.GetReferenceString());
             Console.WriteLine(selectedScripture.GetRenderedText());
@@ -53,11 +54,11 @@ class Program
 
                 if (input.ToLower() == "quit")
                 {
-                    return false; // Termina el juego si el usuario escribe "quit."
+                    return false; // End the game if the user types "quit."
                 }
 
                 selectedScripture.HideRandomWord(random);
-                Console.Clear(); // Borra la pantalla de la consola.
+                Console.Clear(); // Clear the console screen.
                 Console.WriteLine("Scripture Hiding Game");
                 Console.WriteLine(selectedScripture.GetReferenceString());
                 Console.WriteLine(selectedScripture.GetRenderedText());
@@ -69,24 +70,23 @@ class Program
 
             if (playAgainInput == "same")
             {
-                continuePlaying = true; // Continúa jugando con la misma escritura.
+                continuePlaying = true; // Continue playing with the same scripture.
             }
             else if (playAgainInput == "different")
             {
-                continuePlaying = true; // Juega con una escritura diferente.
+                continuePlaying = true; // Play with a different scripture.
                 break;
             }
             else if (playAgainInput == "quit")
             {
-                return false; // Termina el juego.
+                return false; // End the game.
             }
             else
             {
-                return false; // Si la entrada no es válida, también termina el juego.
+                return false; // If the input is not valid, also end the game.
             }
         }
 
         return continuePlaying;
     }
 }
-
