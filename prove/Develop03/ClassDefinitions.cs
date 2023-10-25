@@ -1,5 +1,3 @@
-
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +9,7 @@ public class Reference
     private int verseStart;
     private int verseEnd;
 
+    // Constructor for a reference with a single verse.
     public Reference(string book, int chapter, int verse)
     {
         this.book = book;
@@ -19,6 +18,7 @@ public class Reference
         this.verseEnd = verse;
     }
 
+    // Constructor for a reference with a range of verses.
     public Reference(string book, int chapter, int verseStart, int verseEnd)
     {
         this.book = book;
@@ -27,6 +27,7 @@ public class Reference
         this.verseEnd = verseEnd;
     }
 
+    // Get a formatted reference string.
     public string GetReferenceString()
     {
         if (verseStart == verseEnd)
@@ -47,6 +48,7 @@ public class Scripture
     private List<Word> words;
     private int hiddenWordCount;
 
+    // Constructor to create a Scripture object.
     public Scripture(Reference reference, string text)
     {
         this.reference = reference;
@@ -55,6 +57,7 @@ public class Scripture
         this.hiddenWordCount = 0;
     }
 
+    // Hide a random word in the scripture.
     public void HideRandomWord(Random random)
     {
         List<Word> visibleWords = words.FindAll(word => !word.IsHidden());
@@ -67,16 +70,19 @@ public class Scripture
         }
     }
 
+    // Check if all words in the scripture are hidden.
     public bool IsCompletelyHidden()
     {
         return hiddenWordCount == words.Count;
     }
 
+    // Get a formatted reference string.
     public string GetReferenceString()
     {
         return reference.GetReferenceString();
     }
 
+    // Get the scripture's text with hidden and revealed words.
     public string GetRenderedText()
     {
         var result = new List<string>();
@@ -89,12 +95,14 @@ public class Scripture
         return string.Join(" ", result);
     }
 
+    // Split the scripture's text into individual words.
     private List<Word> ParseWords(string text)
     {
         string[] words = text.Split(' ');
         return Array.ConvertAll(words, word => new Word(word, true)).ToList();
     }
 
+    // Reset the scripture by revealing all words and resetting the hidden word count.
     public void Reset()
     {
         foreach (var word in words)
@@ -110,27 +118,32 @@ public class Word
     private string text;
     private bool hidden;
 
+    // Constructor to create a Word object with an initial visibility state.
     public Word(string text, bool visible = true)
     {
         this.text = text;
         this.hidden = !visible;
     }
 
+    // Hide the word.
     public void Hide()
     {
         hidden = true;
     }
 
+    // Reveal the word.
     public void Reveal()
     {
         hidden = false;
     }
 
+    // Get a display string, showing underscores for hidden words.
     public string Display()
     {
         return hidden ? "_____" : text;
     }
 
+    // Check if the word is hidden.
     public bool IsHidden()
     {
         return hidden;
