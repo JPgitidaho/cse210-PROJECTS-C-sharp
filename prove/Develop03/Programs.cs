@@ -1,3 +1,9 @@
+/* Exiding requeriment:
+*Multiple passages: My program lets me have several Scripture passages, not just one.
+*Load from files: I can also load my own passages from files. I can add, edit, and use the passages I choose.
+*Easier interface: My program asks to press "Enter" to view a passage, instead of starting automatically.
+This gives more control over when to begin the game.
+*Play again: After viewing a passage, the user can choose whether he want to play more with the same passage, a different one, or exit.*/
 using System;
 using System.Collections;
 using System.IO;
@@ -9,7 +15,7 @@ class Program
     public static void Main()
     {
         // Load a list of scriptures from a file.
-        List<Scripture> scriptureList = LoadScripturesFromFile("D:\\BYU 3 SEMESTRE\\cse210-project\\prove\\Develop03\\scriptures.txt");
+        List<Scripture> scriptureList = LoadScripturesFromFile("scriptures.txt");
         
         // Initialize a random number generator.
         Random random = new Random();
