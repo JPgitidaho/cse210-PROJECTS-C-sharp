@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 
 class Program
 {
@@ -10,16 +11,16 @@ class Program
         Random random = new Random();
         bool continuePlaying = true;
 
+        Console.WriteLine("Presiona Enter para mostrar una escritura aleatoria o escribe 'quit' para salir.");
         while (continuePlaying)
         {
-            foreach (var selectedScripture in scriptureList)
+            if (Console.ReadLine().ToLower() == "quit")
             {
-                continuePlaying = PlayScriptureGame(selectedScripture, random);
-                if (!continuePlaying)
-                {
-                    break;
-                }
+                break;
             }
+
+            var selectedScripture = GetRandomScripture(scriptureList, random);
+            continuePlaying = PlayScriptureGame(selectedScripture, random);
         }
     }
 
@@ -86,11 +87,10 @@ class Program
         {
             string[] lines = File.ReadAllLines(filePath);
 
-          for (int i = 0; i < lines.Length - 1; i += 2)
-{
+            for (int i = 0; i < lines.Length - 1; i += 2)
+            {
                 string referenceLine = lines[i];
                 string textLine = lines[i];
-                
 
                 string[] referenceParts = referenceLine.Split('|')[0].Split(' ');
                 string book = referenceParts[0];
@@ -106,5 +106,11 @@ class Program
         }
 
         return scriptures;
+    }
+
+    public static Scripture GetRandomScripture(List<Scripture> scriptureList, Random random)
+    {
+        int randomIndex = random.Next(scriptureList.Count);
+        return scriptureList[randomIndex];
     }
 }
