@@ -41,6 +41,7 @@ namespace DiaryApp
                     //content of diary entries correctly, making the CSV format suitable for Excel.
                     string formattedQuestion = entry.Question.Replace("\"", "\"\"");
                     string formattedResponse = entry.Response.Replace("\"", "\"\"");
+                    string formattedDate = entry.Date.ToString("MM/dd/yyyy h:mm:ss tt");
                     writer.WriteLine($"\"{entry.Date}\",\"{formattedQuestion}\",\"{formattedResponse}\"");
                 
                 }

@@ -6,37 +6,23 @@ public class Reference
 {
     private string book;
     private int chapter;
-    private int verseStart;
-    private int verseEnd;
+    private List<int> verses;
 
-    // Constructor for a reference with a single verse.
-    public Reference(string book, int chapter, int verse)
-    {
-        this.book = book;
-        this.chapter = chapter;
-        this.verseStart = verse;
-        this.verseEnd = verse;
-    }
+
 
     // Constructor for a reference with a range of verses.
-    public Reference(string book, int chapter, int verseStart, int verseEnd)
+    public Reference(string book, int chapter, params int[] verseNumbers)
     {
         this.book = book;
         this.chapter = chapter;
-        this.verseStart = verseStart;
-        this.verseEnd = verseEnd;
+        this.verses = verseNumbers.ToList();
     }
 
     // Get a formatted reference string.
-    public string GetReferenceString()
+     public string GetReferenceString()
     {
-        if (verseStart == verseEnd)
-        {
-            return $"{book} {chapter}:{verseStart}";
-        }
-        else
-        {
-            return $"{book} {chapter}:{verseStart}-{verseEnd}";
-        }
+        string verseString = string.Join("-", verses);
+        return $"{book} {chapter}:{verseString}";
     }
+    
 }
