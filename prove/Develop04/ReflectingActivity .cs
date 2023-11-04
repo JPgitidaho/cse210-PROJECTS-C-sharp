@@ -1,5 +1,6 @@
 class ReflectingActivity : Activity
 {
+    // Lists of prompts for reflection
     private List<string> Prompt = new List<string>
     {
         "Think of a time when you stood up for someone else.",
@@ -21,18 +22,25 @@ class ReflectingActivity : Activity
         "How can you keep this experience in mind in the future?"
     };
 
+    // Constructor for the ReflectingActivity class
     public ReflectingActivity()
     {
+        // Set the name and message for the ReflectingActivity
         NameOfActivity = "Reflecting Activity";
         Message = "This activity will help you reflect on times in your life when you have shown strength and resilience. \nThis will help you recognize the power you have and how you can use it in other aspects of your life.";
     }
 
+    // Override the base class activity function for the reflecting activity
     public override void activity()
     {
+        // Call the base class activity method to start with the standard animation
         base.activity();
 
+        // Initialize a random number generator
         Random randomGenerator = new Random();
         DateTime endTime = DateTime.Now.AddSeconds(duration);
+
+        // Store the original duration and set it back after a calculation
         int sD = duration;
         duration = (endTime - DateTime.Now).Seconds;
         duration = sD;
@@ -42,6 +50,7 @@ class ReflectingActivity : Activity
 
         List<string> remainingPrompts = new List<string>(Prompt);
 
+        // Continue the activity as long as there's time and prompts remaining
         while (DateTime.Now < endTime && remainingPrompts.Count > 0)
         {
             int randomPromptIndex = randomGenerator.Next(0, remainingPrompts.Count);
@@ -64,11 +73,12 @@ class ReflectingActivity : Activity
                 remainingTime -= timeSpacingValue;
             }
 
-            // Remover la pregunta usada de la lista de preguntas restantes
+            // Remove the used prompt from the list of remaining prompts
             remainingPrompts.RemoveAt(randomPromptIndex);
         }
     }
 
+    // Helper function to get a random item from a list
     private string GetRandomItem(List<string> items, Random randomGenerator)
     {
         int randomIndex = randomGenerator.Next(0, items.Count);
