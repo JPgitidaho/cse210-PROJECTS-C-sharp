@@ -6,12 +6,6 @@ class Activity
     protected int duration;
     protected List<int> Timespacing = new List<int>();
 
-    // Constructor for the Activity class
-    public Activity()
-    {
-        // Constructor doesn't have specific functionality.
-    }
-
     // Display a loading animation to get ready for the activity
     public void Start(int Length)
     {
@@ -116,7 +110,8 @@ class Activity
     {
         // Display welcome message and instructions
         Console.WriteLine($"Welcome to the {NameOfActivity}");
-        Console.WriteLine($"\n{Message}");
+         Console.WriteLine();
+        Console.WriteLine($"{Message}");
         Console.WriteLine($"How long would you like your activity to take in seconds?");
         duration = int.Parse(Console.ReadLine());
 
