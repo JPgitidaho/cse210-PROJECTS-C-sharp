@@ -1,3 +1,4 @@
+// Encapsulation: Separate concerns with a dedicated class for reports
 class Report
 {
     public static void GenerateReport(User user)
