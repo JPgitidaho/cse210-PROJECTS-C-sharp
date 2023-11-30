@@ -11,25 +11,31 @@ class Report
     }
 
     private static void DisplayCompletedTasks(User user)
-    {
-        Console.WriteLine($"Completed Tasks for {user.UserName}:");
-        int completedTaskCount = 0;
+{
+    Console.WriteLine($"Completed Tasks for {user.UserName}:");
 
-        foreach (var taskList in user.TaskLists)
+    foreach (var taskList in user.TaskLists)
+    {
+        var completedTasksInList = taskList.Tasks.Where(task => task.IsCompleted);
+
+        if (completedTasksInList.Any())
         {
-            foreach (var task in taskList.Tasks)
+            Console.WriteLine($"Tasks in {taskList.ListName}:");
+
+            foreach (var completedTask in completedTasksInList)
             {
-                if (task.IsCompleted)
-                {
-                    Console.WriteLine($"- {task.Description} (Category: {taskList.ListName})");
-                    completedTaskCount++;
-                }
+                Console.WriteLine($"- {completedTask.Description}");
             }
         }
-
-        if (completedTaskCount == 0)
+        else
         {
-            Console.WriteLine("No tasks completed yet.");
+            Console.WriteLine($"No completed tasks in {taskList.ListName}.");
         }
     }
+
+    if (!user.TaskLists.Any())
+    {
+        Console.WriteLine("No completed tasks yet.");
+    }
+}
 }
