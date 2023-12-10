@@ -1,9 +1,16 @@
-// Encapsulation: Separate concerns with a dedicated class for rewards
+
 class Reward
 {
+    // Provides rewards to the user.
     public static void ProvideRewards(User user)
     {
-        Console.WriteLine($"{user.UserName} earned rewards!");
-        user.Points += 5;
+        user.AddPoints(5);
+    }
+
+    // Displays the earned rewards for the user.
+    public static void DisplayEarnedRewards(User user)
+    {
+        Console.WriteLine($"{user.GetPoints()} earned rewards!");
     }
 }
+

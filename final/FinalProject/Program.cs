@@ -1,54 +1,42 @@
+using System;
+
 class Program
 {
     static void Main()
     {
-        // Solicitar el nombre del usuario
+        // Ask for the user's name
         Console.Write("Enter your name: ");
         string userName = Console.ReadLine();
 
-        // Crear una instancia del usuario
+        // Create an instance of the user
         User user = new User(userName);
 
-        // Crear una lista personalizada de tareas para el usuario
+        // Create a custom task list for the user
         CleaningTaskList customTaskList = new CleaningTaskList("Your Tasks list");
 
-        // Agregar la instancia de CleaningTaskList a la lista TaskLists del usuario
+        // Add the instance of CleaningTaskList to the user's TaskLists
         user.TaskLists.Add(customTaskList);
 
-        // Mensaje de bienvenida
+        // Welcome message
         Console.WriteLine($"Welcome to the Household Task Manager, {user.UserName}!");
 
-        // Bucle principal del programa
-        while (true)
+        int choice;
+        do
         {
-            // Menú de opciones
-            Console.WriteLine("\nMenu:");
-            Console.WriteLine("1. Display Tasks");
-            Console.WriteLine("2. Add Custom Task");
-            Console.WriteLine("3. Complete Task");
-            Console.WriteLine("4. Display Statistics");
-            Console.WriteLine("5. Generate Report");
-            Console.WriteLine("0. Exit");
+            choice = Menu.ShowMenu();
 
-            // Solicitar la elección del usuario
-            Console.Write("Enter your choice: ");
-            string choice = Console.ReadLine();
-
-            // Procesar la elección del usuario
             switch (choice)
             {
-                case "1":
+                case 1:
                     customTaskList.DisplayTasks();
                     break;
-                case "2":
-                    // Solicitar al usuario descripción de la tarea y agregarla a la lista
+                case 2:
                     Console.Write("Enter task description: ");
                     string taskDescription = Console.ReadLine();
                     customTaskList.AddTask(taskDescription);
                     Console.WriteLine($"Task '{taskDescription}' added.");
                     break;
-                case "3":
-                    // Solicitar al usuario el índice de la tarea a completar y marcarla como completada
+                case 3:
                     Console.Write("Enter the index of the task to complete: ");
                     if (int.TryParse(Console.ReadLine(), out int taskIndex))
                     {
@@ -59,24 +47,20 @@ class Program
                         Console.WriteLine("Invalid input. Please enter a valid number.");
                     }
                     break;
-                case "4":
-                    // Mostrar estadísticas del usuario
+                case 4:
                     Statistics.DisplayStatistics(user);
                     break;
-                case "5":
-                    // Generar un informe para el usuario
+                case 5:
                     Report.GenerateReport(user);
                     break;
-
-                case "0":
-                    // Salir del programa
+                case 0:
                     Console.WriteLine("Exiting. Goodbye!");
-                    return;
+                    break;
                 default:
-                    // Mensaje para elecciones no válidas
                     Console.WriteLine("Invalid choice. Please try again.");
                     break;
             }
-        }
+
+        } while (choice != 0);
     }
 }

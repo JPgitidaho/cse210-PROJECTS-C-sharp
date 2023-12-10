@@ -1,41 +1,43 @@
-// Inheritance: Inherit from TaskList for different areas of the home
-
+// Represents a specific type of task list for cleaning tasks.
 class CleaningTaskList : TaskList
 {
+    // Constructor to initialize the cleaning task list with a name.
     public CleaningTaskList(string listName) : base(listName) { }
+    
 
-    public void AddTask(string taskDescription)
-    {
-        Tasks.Add(new Task(taskDescription));
-    }
-
-    // Implementación del método abstracto en la clase derivada
+    // Overrides the DisplayTasks method to show tasks in the cleaning task list.
     public override void DisplayTasks()
     {
-        Console.WriteLine($"Cleaning Tasks for {ListName}:");
+        Console.WriteLine($"Tasks in {ListName}:");
 
-        for (int i = 0; i < Tasks.Count; i++)
+        if (Tasks.Any())
         {
-            Console.WriteLine($"[{i + 1}] - {Tasks[i].Description} {(Tasks[i].IsCompleted ? "[Completed]" : "")}");
+            for (int i = 0; i < Tasks.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {Tasks[i].GetDescription()}");
+            }
+        }
+        else
+        {
+            Console.WriteLine("No tasks in the list.");
         }
     }
+    
 
-
-
-    public void CompleteTask(int taskIndex, User user)
+    // Marks a task in the cleaning task list as completed and provides rewards to the user.
+     public override void CompleteTask(int taskIndex, User user)
     {
-        // Ajustar el índice proporcionado por el usuario para que coincida con el índice basado en cero
         int adjustedIndex = taskIndex - 1;
 
         if (adjustedIndex >= 0 && adjustedIndex < Tasks.Count)
         {
             Tasks[adjustedIndex].CompleteTask();
-            Console.WriteLine($"Task '{Tasks[adjustedIndex].Description}' marked as completed.");
+            Console.WriteLine($"Task '{Tasks[adjustedIndex].GetDescription()}' marked as completed.");
 
-            // Agregar la tarea completada a la lista de TaskLists del usuario
-            user.TaskLists.Add(this);
+            // Adds the completed task to the user's task lists.
+            user.AddTaskList(this);
 
-            // Reward user with points for completing a task
+            // Provides rewards to the user.
             Reward.ProvideRewards(user);
         }
         else
@@ -43,4 +45,5 @@ class CleaningTaskList : TaskList
             Console.WriteLine("Invalid task index.");
         }
     }
+    
 }

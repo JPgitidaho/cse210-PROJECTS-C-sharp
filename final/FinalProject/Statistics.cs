@@ -1,9 +1,8 @@
-// Encapsulation: Separate concerns with a dedicated class for statistics
-
 class Statistics
 {
+    // Displays user statistics, including the total points.
     public static void DisplayStatistics(User user)
     {
-        Console.WriteLine($"Statistics for {user.UserName}: Points - {user.Points}");
+        Console.WriteLine($"User Statistics: Total Points - {user.GetPoints()}");
     }
 }

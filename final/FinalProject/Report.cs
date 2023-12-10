@@ -1,41 +1,51 @@
-// Encapsulation: Separate concerns with a dedicated class for reports
+
+using System.Text;
+using System.Linq;
+
 class Report
 {
+    // Generates a report for completed tasks of a user.
     public static void GenerateReport(User user)
     {
         Console.WriteLine($"Generating report for {user.UserName}...");
-
-        // Mostrar la lista de tareas completadas
-        DisplayCompletedTasks(user);
-
+        // Implementation for generating the report.
     }
 
-    private static void DisplayCompletedTasks(User user)
-{
-    Console.WriteLine($"Completed Tasks for {user.UserName}:");
-
-    foreach (var taskList in user.TaskLists)
+    // Gets a string representation of completed tasks for a user.
+    private static string GetCompletedTasks(User user)
     {
-        var completedTasksInList = taskList.Tasks.Where(task => task.IsCompleted);
+        StringBuilder report = new StringBuilder($"Completed Tasks for {user.UserName}:");
 
-        if (completedTasksInList.Any())
+        foreach (var taskList in user.TaskLists)
         {
-            Console.WriteLine($"Tasks in {taskList.ListName}:");
+            var completedTasksInList = taskList.GetTasks().Where(task => task.IsCompleted);
 
-            foreach (var completedTask in completedTasksInList)
+            if (completedTasksInList.Any())
             {
-                Console.WriteLine($"- {completedTask.Description}");
+                report.AppendLine($"Tasks in {taskList.GetListName()}:");
+
+                foreach (var completedTask in completedTasksInList)
+                {
+                    report.AppendLine($"- {completedTask.Description}");
+                }
+            }
+            else
+            {
+                report.AppendLine($"No completed tasks in {taskList.GetListName()}.");
             }
         }
-        else
+
+        if (!user.TaskLists.Any())
         {
-            Console.WriteLine($"No completed tasks in {taskList.ListName}.");
+            report.AppendLine("No completed tasks yet.");
         }
+
+        return report.ToString();
     }
 
-    if (!user.TaskLists.Any())
+    // Displays completed tasks for a user.
+    public static void DisplayCompletedTasks(User user)
     {
-        Console.WriteLine("No completed tasks yet.");
+        Console.WriteLine(GetCompletedTasks(user));
     }
-}
 }
